@@ -10,8 +10,12 @@ from PyQt5.QtWidgets import *
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setGeometry(100, 100, 800, 800)
+        self.setWindowTitle('фотошоп 2021')
 
+        self.btn_go_paint = QPushButton('GO PAINT!', self)
+        self.btn_go_paint.move(300, 50)
+        self.btn_go_paint.clicked.connect(self.go_paint)
 
         # self.setMouseTracking(True)
         self.timer_id = QtCore.QTimer()
@@ -19,12 +23,11 @@ class Example(QMainWindow):
         self.timer_animation.timeout.connect(self.go_paint)
 
         self.do_paint = False
-        self.btn_go_paint.clicked.connect(self.go_paint)
 
     def paintEvent(self, event):
-        n = random.randint(5, 100)
-        # r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
-        r, g, b = 255, 255, 0
+        n = random.randint(5, 300)
+        r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        # r, g, b = 255, 255, 0
         qp = QPainter()
         qp.begin(self)
         self.draw_elips(qp, r, g, b, n)
